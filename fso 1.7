@@ -1,1 +1,37 @@
+import { useState } from 'react'
 
+const App = () => {
+  const [hyvä, setHyvä] = useState(0)
+  const [neutraali, setNeutraali] = useState(0)
+  const [huono, setHuono] = useState(0)
+
+  const yhteensä = hyvä + neutraali + huono
+  const keskiarvo = yhteensä === 0
+    ? 0
+    : (hyvä - huono) / yhteensä
+
+  const positiivisia = yhteensä === 0
+    ? 0
+    : (hyvä / yhteensä) * 100
+
+  return (
+    <div>
+      <h1>Anna palautetta</h1>
+
+      <button onClick={() => setHyvä(hyvä + 1)}>hyvä</button>
+      <button onClick={() => setNeutraali(neutraali + 1)}>neutraali</button>
+      <button onClick={() => setHuono(huono + 1)}>huono</button>
+
+      <h1>Tilastot</h1>
+
+      <div>hyvä {hyvä}</div>
+      <div>neutraali {neutraali}</div>
+      <div>huono {huono}</div>
+      <div>yhteensä {yhteensä}</div>
+      <div>keskiarvo {keskiarvo}</div>
+      <div>positiivisia {positiivisia} %</div>
+    </div>
+  )
+}
+
+export default App
