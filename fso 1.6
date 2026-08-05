@@ -1,1 +1,25 @@
+import { useState } from 'react'
 
+const App = () => {
+  const [hyvä, setHyvä] = useState(0)
+  const [neutraali, setNeutraali] = useState(0)
+  const [huono, setHuono] = useState(0)
+
+  return (
+    <div>
+      <h1>Anna palautetta</h1>
+
+      <button onClick={() => setHyvä(hyvä + 1)}>hyvä</button>
+      <button onClick={() => setNeutraali(neutraali + 1)}>neutraali</button>
+      <button onClick={() => setHuono(huono + 1)}>huono</button>
+
+      <h1>Tilastot</h1>
+
+      <div>hyvä {hyvä}</div>
+      <div>neutraali {neutraali}</div>
+      <div>huono {huono}</div>
+    </div>
+  )
+}
+
+export default App
