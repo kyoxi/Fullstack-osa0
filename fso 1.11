@@ -1,1 +1,113 @@
+import { useState } from 'react'
 
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
+
+const StatisticLine = (props) => {
+  return (
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
+  )
+}
+
+const Statistics = (props) => {
+  const yhteensä =
+    props.hyvä + props.neutraali + props.huono
+
+  if (yhteensä === 0) {
+    return (
+      <div>
+        <h1>Tilastot</h1>
+        <p>Ei palautetta annettu</p>
+      </div>
+    )
+  }
+
+  const keskiarvo =
+    (props.hyvä - props.huono) / yhteensä
+
+  const positiivisia =
+    (props.hyvä / yhteensä) * 100
+
+  return (
+    <div>
+      <h1>Tilastot</h1>
+
+      <table>
+        <tbody>
+          <StatisticLine
+            text="hyvä"
+            value={props.hyvä}
+          />
+
+          <StatisticLine
+            text="neutraali"
+            value={props.neutraali}
+          />
+
+          <StatisticLine
+            text="huono"
+            value={props.huono}
+          />
+
+          <StatisticLine
+            text="yhteensä"
+            value={yhteensä}
+          />
+
+          <StatisticLine
+            text="keskiarvo"
+            value={keskiarvo}
+          />
+
+          <StatisticLine
+            text="positiivisia"
+            value={positiivisia + ' %'}
+          />
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+const App = () => {
+  const [hyvä, setHyvä] = useState(0)
+  const [neutraali, setNeutraali] = useState(0)
+  const [huono, setHuono] = useState(0)
+
+  return (
+    <div>
+      <h1>Anna palautetta</h1>
+
+      <Button
+        text="hyvä"
+        handleClick={() => setHyvä(hyvä + 1)}
+      />
+
+      <Button
+        text="neutraali"
+        handleClick={() => setNeutraali(neutraali + 1)}
+      />
+
+      <Button
+        text="huono"
+        handleClick={() => setHuono(huono + 1)}
+      />
+
+      <Statistics
+        hyvä={hyvä}
+        neutraali={neutraali}
+        huono={huono}
+      />
+    </div>
+  )
+}
+
+export default App
